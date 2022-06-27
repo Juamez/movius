@@ -27,7 +27,7 @@ const api = axios.create({
 let maxPage
 let page = 1
 
-const likedMoviesList = () => {
+function likedMoviesList() {
   const item = JSON.parse(localStorage.getItem('liked_movies'))
   let movies
 
@@ -39,7 +39,7 @@ const likedMoviesList = () => {
   return movies
 }
 
-const likedMovie = (movie) => {
+function likedMovie(movie) {
   const likedMovies = likedMoviesList()
 
   if(likedMovies[movie.id]) {
@@ -48,7 +48,7 @@ const likedMovie = (movie) => {
     likedMovies[movie.id] = movie
   }
 
-  localStorage.setItem('likedMovies', JSON.stringify(likedMovies))
+  localStorage.setItem('liked_movies', JSON.stringify(likedMovies))
 }
 
 
@@ -261,11 +261,9 @@ const getRelatedMoviesId = async (id) => {
   createMovies(relatedMovies, relatedMoviesContainer);
 }
 
-export const getLikedMovies = () => {
+export function getLikedMovies() {
   const likedMovies = likedMoviesList();
   const moviesArray = Object.values(likedMovies);
 
   createMovies(moviesArray, likedMoviesListArticle, { lazyLoad: true, clean: true });
-  
-  console.log(likedMovies)
 }
